@@ -1,15 +1,19 @@
-import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL", "postgresql+psycopg://rag:rag@localhost:5432/rag"
-)
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+from app.db import engine, init_db
 
-app = FastAPI(title="Agentic RAG")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(title="Agentic RAG", lifespan=lifespan)
 
 
 @app.get("/health")
