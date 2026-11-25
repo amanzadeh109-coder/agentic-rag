@@ -19,8 +19,10 @@ services:
       - ./app:/code/app
       - ./scripts:/code/scripts
       - ./starter:/code/starter:ro
+      - uploads:/data/uploads
     depends_on:
       - db
 
 volumes:
   pgdata:
+  uploads:

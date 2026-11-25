@@ -6,3 +6,4 @@ pydantic-settings
 pgvector
 pymupdf==1.25.5
 pymupdf4llm==0.0.17
+python-multipart
