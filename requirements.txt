@@ -7,3 +7,5 @@ pgvector
 pymupdf==1.25.5
 pymupdf4llm==0.0.17
 python-multipart
+fastembed==0.7.4
+pytest

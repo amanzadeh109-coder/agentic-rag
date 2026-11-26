@@ -7,7 +7,7 @@ from sqlalchemy import text
 
 from app.db import engine, init_db
 from app.ingest import fail_interrupted_jobs
-from app.routers import documents
+from app.routers import documents, search
 
 logging.basicConfig(level=logging.INFO)
 
@@ -21,6 +21,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Agentic RAG", lifespan=lifespan)
 app.include_router(documents.router)
+app.include_router(search.router)
 
 
 @app.get("/health")
