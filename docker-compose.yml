@@ -24,9 +24,18 @@ services:
       - uploads:/data/uploads
       - models:/models
       - ./tests:/code/tests
+      - ./runs:/code/runs
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     depends_on:
       - db
+  ui:
+    build: ./ui
+    environment:
+      API_URL: http://api:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
 
 volumes:
   pgdata:
